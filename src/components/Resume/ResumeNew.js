@@ -1,15 +1,40 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Particle from "../Particle";
 import pdf from "../../Assets/../Assets/Soumyajit_Behera.pdf";
 import { AiOutlineDownload } from "react-icons/ai";
 import { Document, Page, pdfjs } from "react-pdf";
+import CertificationCard from "./CertificationCard";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 function ResumeNew() {
   const [width, setWidth] = useState(1200);
+
+  const certifications = [
+    {
+      id: 1,
+      title: "Certification Title 1",
+      issuer: "Issuer Name",
+      description: "Add your certification description here.",
+      certificateLink: "#",
+    },
+    {
+      id: 2,
+      title: "Certification Title 2",
+      issuer: "Issuer Name",
+      description: "Add your certification description here.",
+      certificateLink: "#",
+    },
+    {
+      id: 3,
+      title: "Certification Title 3",
+      issuer: "Issuer Name",
+      description: "Add your certification description here.",
+      certificateLink: "#",
+    },
+  ];
 
   useEffect(() => {
     setWidth(window.innerWidth);
@@ -47,6 +72,23 @@ function ResumeNew() {
             <AiOutlineDownload />
             &nbsp;Download CV
           </Button>
+        </Row>
+
+        {/* Certifications Section */}
+        <Row style={{ justifyContent: "center", marginTop: "50px" }}>
+          <h1 className="heading">Certifications</h1>
+        </Row>
+        <Row style={{ justifyContent: "center" }}>
+          {certifications.map((cert) => (
+            <Col md={4} className="project-card" key={cert.id}>
+              <CertificationCard
+                title={cert.title}
+                issuer={cert.issuer}
+                description={cert.description}
+                certificateLink={cert.certificateLink}
+              />
+            </Col>
+          ))}
         </Row>
       </Container>
     </div>
